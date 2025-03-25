@@ -7,13 +7,15 @@ interface StarFieldProps {
   starCount?: number;
   speed?: number;
   glowIntensity?: number;
+  shootingStarFrequency?: number;
 }
 
 export const StarField = ({
   className,
   starCount = 200,
   speed = 0.05,
-  glowIntensity = 2.5
+  glowIntensity = 2.5,
+  shootingStarFrequency = 0.03
 }: StarFieldProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -25,6 +27,7 @@ export const StarField = ({
     if (!ctx) return;
     
     const stars: { x: number; y: number; z: number; size: number; color: string; twinkle: number; twinkleSpeed: number }[] = [];
+    const shootingStars: { x: number; y: number; length: number; speed: number; angle: number; opacity: number; decay: number }[] = [];
     
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -59,8 +62,23 @@ export const StarField = ({
       }
     };
     
+    // Function to create a new shooting star
+    const createShootingStar = () => {
+      const angle = Math.random() * Math.PI * 0.5 - Math.PI * 0.25; // Angle between -45 and 45 degrees
+      shootingStars.push({
+        x: Math.random() * canvas.width, // Random starting x position
+        y: Math.random() * canvas.height * 0.5, // Start in the top half of the screen
+        length: 60 + Math.random() * 100, // Length of the shooting star trail
+        speed: 4 + Math.random() * 10, // Speed of the shooting star
+        angle: angle, // Direction angle
+        opacity: 0.7 + Math.random() * 0.3, // Initial opacity
+        decay: 0.01 + Math.random() * 0.02 // Rate at which the shooting star fades
+      });
+    };
+    
     let animationFrameId: number;
     let lastTime = 0;
+    let timeSinceLastShootingStar = 0;
     
     const render = (time = 0) => {
       // Calculate delta time for smoother animations
@@ -76,6 +94,7 @@ export const StarField = ({
       ctx.fillStyle = bgGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
+      // Update and draw regular stars
       stars.forEach(star => {
         // Move the star
         star.z -= speed * (deltaTime * 0.05 || 1);
@@ -168,6 +187,64 @@ export const StarField = ({
         }
       });
       
+      // Check if we should create a new shooting star
+      timeSinceLastShootingStar += deltaTime;
+      if (Math.random() < shootingStarFrequency && timeSinceLastShootingStar > 1000) {
+        createShootingStar();
+        timeSinceLastShootingStar = 0;
+      }
+      
+      // Update and draw shooting stars
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const star = shootingStars[i];
+        
+        // Move the shooting star
+        star.x += Math.cos(star.angle) * star.speed;
+        star.y += Math.sin(star.angle) * star.speed;
+        
+        // Decrease opacity (fade out)
+        star.opacity -= star.decay;
+        
+        // Remove if completely faded or off-screen
+        if (star.opacity <= 0 || 
+            star.x < -star.length || 
+            star.x > canvas.width + star.length || 
+            star.y < -star.length || 
+            star.y > canvas.height + star.length) {
+          shootingStars.splice(i, 1);
+          continue;
+        }
+        
+        // Draw the shooting star
+        ctx.beginPath();
+        ctx.moveTo(star.x, star.y);
+        ctx.lineTo(
+          star.x - Math.cos(star.angle) * star.length,
+          star.y - Math.sin(star.angle) * star.length
+        );
+        
+        // Create gradient for the shooting star trail
+        const trailGradient = ctx.createLinearGradient(
+          star.x, star.y,
+          star.x - Math.cos(star.angle) * star.length,
+          star.y - Math.sin(star.angle) * star.length
+        );
+        
+        trailGradient.addColorStop(0, `rgba(255, 255, 255, ${star.opacity})`);
+        trailGradient.addColorStop(0.1, `rgba(200, 220, 255, ${star.opacity * 0.8})`);
+        trailGradient.addColorStop(1, 'rgba(200, 220, 255, 0)');
+        
+        ctx.strokeStyle = trailGradient;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        
+        // Add a small glow at the head of the shooting star
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+        ctx.fill();
+      }
+      
       animationFrameId = window.requestAnimationFrame(render);
     };
     
@@ -179,7 +256,7 @@ export const StarField = ({
       window.removeEventListener('resize', resizeCanvas);
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [starCount, speed, glowIntensity]);
+  }, [starCount, speed, glowIntensity, shootingStarFrequency]);
   
   return (
     <canvas

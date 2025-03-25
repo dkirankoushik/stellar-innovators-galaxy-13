@@ -10,10 +10,10 @@ export const Navbar = () => {
 
   const navLinks = [
     { title: 'Home', href: '/' },
-    { title: 'About', href: '#about' },
-    { title: 'Problem & Solution', href: '#solution' },
-    { title: 'Team', href: '#team' },
-    { title: 'Gallery', href: '#gallery' },
+    { title: 'About', href: '/#about' },
+    { title: 'Services', href: '/services' },
+    { title: 'Projects', href: '/projects' },
+    { title: 'Blog', href: '/blog' },
   ];
 
   useEffect(() => {
@@ -47,16 +47,26 @@ export const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className="text-sm font-medium text-white/80 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-stellar-blue after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
-            >
-              {link.title}
-            </a>
+            link.href.startsWith('/#') ? (
+              <a
+                key={index}
+                href={link.href}
+                className="text-sm font-medium text-white/80 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-stellar-blue after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+              >
+                {link.title}
+              </a>
+            ) : (
+              <Link
+                key={index}
+                to={link.href}
+                className="text-sm font-medium text-white/80 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-stellar-blue after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+              >
+                {link.title}
+              </Link>
+            )
           ))}
           <a 
-            href="#contact" 
+            href="/#contact" 
             className="px-4 py-2 rounded-full border border-stellar-blue text-stellar-blue hover:bg-stellar-blue/10 transition-colors text-sm font-medium"
           >
             Contact Us
@@ -78,17 +88,28 @@ export const Navbar = () => {
         <div className="md:hidden absolute top-full left-0 right-0 glass-morphism animate-fade-down">
           <div className="container py-4 flex flex-col space-y-4">
             {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="text-white/80 hover:text-white py-2 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.title}
-              </a>
+              link.href.startsWith('/#') ? (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="text-white/80 hover:text-white py-2 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.title}
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  to={link.href}
+                  className="text-white/80 hover:text-white py-2 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.title}
+                </Link>
+              )
             ))}
             <a 
-              href="#contact" 
+              href="/#contact" 
               className="px-4 py-2 rounded-full border border-stellar-blue text-stellar-blue hover:bg-stellar-blue/10 transition-colors text-sm font-medium self-start"
               onClick={() => setIsMenuOpen(false)}
             >
