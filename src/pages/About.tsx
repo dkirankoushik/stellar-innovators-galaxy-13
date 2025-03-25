@@ -3,12 +3,9 @@ import { useEffect } from 'react';
 import { StarField } from '@/components/ui/star-field';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
-import { Hero } from '@/components/sections/hero';
-import { ProblemSolution } from '@/components/sections/problem-solution';
-import { Team } from '@/components/sections/team';
-import { Contact } from '@/components/sections/contact';
+import { About } from '@/components/sections/about';
 
-const Index = () => {
+const AboutPage = () => {
   useEffect(() => {
     // Smooth scroll implementation for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -47,17 +44,8 @@ const Index = () => {
       
       {/* Main Content */}
       <main>
-        {/* Hero Section */}
-        <Hero />
-        
-        {/* Problem & Solution Section */}
-        <ProblemSolution />
-        
-        {/* Team Section */}
-        <Team />
-        
-        {/* Contact Section */}
-        <Contact />
+        {/* About Section */}
+        <About />
       </main>
       
       {/* Footer */}
@@ -66,4 +54,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default AboutPage;
