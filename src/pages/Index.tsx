@@ -41,8 +41,8 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-space-black overflow-x-hidden">
-      {/* Animated Star Background */}
-      <StarField />
+      {/* Enhanced Animated Star Background with better glow effects */}
+      <StarField starCount={200} glowIntensity={3} />
       
       {/* Navbar */}
       <Navbar />
