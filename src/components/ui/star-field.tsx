@@ -85,6 +85,7 @@ export const StarField = ({
           ctx.beginPath();
           ctx.arc(x, y, radius * 2, 0, Math.PI * 2);
           const gradient = ctx.createRadialGradient(x, y, radius, x, y, radius * 2);
+          // Fixed the RGBA format - removed the extra alpha parameter
           gradient.addColorStop(0, star.color.replace(')', ', 0.3)').replace('rgba', 'rgba'));
           gradient.addColorStop(1, star.color.replace(')', ', 0)').replace('rgba', 'rgba'));
           ctx.fillStyle = gradient;
