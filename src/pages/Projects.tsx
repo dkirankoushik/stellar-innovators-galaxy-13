@@ -1,5 +1,4 @@
 
-import { StarField } from '@/components/ui/star-field';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { SectionHeading } from '@/components/ui/section-heading';
@@ -37,10 +36,7 @@ const Projects = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-space-black overflow-x-hidden">
-      {/* Enhanced Animated Star Background with shooting stars */}
-      <StarField starCount={250} glowIntensity={3.5} shootingStarFrequency={0.05} />
-      
+    <div className="min-h-screen overflow-x-hidden">
       {/* Navbar */}
       <Navbar />
       

@@ -2,7 +2,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { StarField } from "@/components/ui/star-field";
 
 const NotFound = () => {
   const location = useLocation();
@@ -15,8 +14,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-space-black text-white">
-      <StarField />
+    <div className="min-h-screen flex items-center justify-center text-white">
       <div className="text-center glass-card p-12 animate-fade-up max-w-lg mx-auto">
         <h1 className="text-6xl font-bold mb-4 text-gradient">404</h1>
         <p className="text-xl text-white/80 mb-8">The page you're looking for doesn't exist or has been moved.</p>

@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,29 +38,24 @@
   }
   
   body {
-    @apply antialiased overflow-x-hidden;
     font-family: 'Montserrat', 'SF Pro Display', sans-serif;
-    background: 
-      radial-gradient(circle, rgba(0, 255, 208, 0.1) 2%, transparent 2%),
-      linear-gradient(
-        135deg, 
-        rgba(18, 30, 58, 0.9), 
-        rgba(5, 10, 25, 0.95)
-      );
-    background-size: 4em 7em, 100% 100%;
-    background-color: rgba(5, 10, 25, 0.95);
-    background-attachment: fixed;
-    color: #ffffff;
     scroll-behavior: smooth;
-    animation: backgroundScroll 44s linear infinite;
+    background: radial-gradient(circle, #00ffd092 2%, transparent 2%);
+    background-size: 4em 7em;
+    background-color: #000015;
+    color: #ffffff;
+    opacity: 1;
+    animation: animate 44s linear infinite;
+    @apply antialiased overflow-x-hidden;
+    background-attachment: fixed;
   }
 
-  @keyframes backgroundScroll {
+  @keyframes animate {
     from {
-      background-position: 0 -500px, 0 0;
+      background-position: 0 -500px;
     }
     to {
-      background-position: 0 0, 0 0;
+      background-position: 0 0;
     }
   }
 
