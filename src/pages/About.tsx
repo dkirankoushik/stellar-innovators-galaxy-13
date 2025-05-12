@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
 import { About } from '@/components/sections/about';
+import { Timeline } from '@/components/sections/timeline';
 
 const AboutPage = () => {
   useEffect(() => {
@@ -42,6 +43,9 @@ const AboutPage = () => {
       <main>
         {/* About Section */}
         <About />
+        
+        {/* Timeline Section */}
+        <Timeline />
       </main>
       
       {/* Footer */}
