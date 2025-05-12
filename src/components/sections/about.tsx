@@ -1,35 +1,6 @@
-
 import { SectionHeading } from '../ui/section-heading';
 
 export const About = () => {
-  const milestones = [
-    {
-      year: '2021',
-      title: 'Humble Beginnings',
-      description: 'Satellite launch by NAL team with drones.'
-    },
-    {
-      year: '2022',
-      title: 'Recognition',
-      description: 'Won 3rd Prize at ISRO-InSpace competition.'
-    },
-    {
-      year: '2024',
-      title: 'Transformation',
-      description: 'Rebranded from M.A.T.R.I.X to Stellarix Space.'
-    },
-    {
-      year: '2024',
-      title: 'CANSAT Achievement',
-      description: 'Listed in the Top 20 Teams out of 142 in CANSAT-India. Only South Indian team in the 1st National CanSat Contest by ISRO-InSpace.'
-    },
-    {
-      year: '2024',
-      title: 'Incorporation',
-      description: 'Company Incorporated in April 2024.'
-    }
-  ];
-  
   return (
     <section id="about" className="py-24 relative">
       <div className="container">
@@ -61,24 +32,14 @@ export const About = () => {
           </div>
           
           <div className="order-1 md:order-2">
-            <h3 className="text-2xl font-semibold mb-6 text-gradient">Milestones</h3>
-            <div className="relative border-l border-stellar-blue/30 pl-6 space-y-8">
-              {milestones.map((milestone, index) => (
-                <div 
-                  key={index} 
-                  className="relative animate-fade-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="absolute -left-[25px] w-4 h-4 rounded-full bg-space-dark border-2 border-stellar-blue"></div>
-                  <div className="glass-card p-4">
-                    <div className="text-xs font-semibold inline-block px-2 py-1 rounded-full bg-stellar-blue/10 text-stellar-blue mb-2">
-                      {milestone.year}
-                    </div>
-                    <h4 className="text-lg font-medium text-white mb-1">{milestone.title}</h4>
-                    <p className="text-sm text-white/70">{milestone.description}</p>
-                  </div>
-                </div>
-              ))}
+            <h3 className="text-2xl font-semibold mb-6 text-gradient">About Stellarix</h3>
+            <div className="glass-card p-6">
+              <p className="text-white/80 mb-4">
+                Stellarix Space, formerly known as M.A.T.R.I.X, was established in 2021 with a clear vision and mission to advance space technology in India.
+              </p>
+              <p className="text-white/80">
+                Our journey has been marked by significant achievements, including recognition in the CANSAT-India competition and our incorporation as Stellarix Space Private Limited in April 2024.
+              </p>
             </div>
           </div>
         </div>
