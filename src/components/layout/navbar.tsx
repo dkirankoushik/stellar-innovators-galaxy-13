@@ -13,6 +13,8 @@ export const Navbar = () => {
     { title: 'About', href: '/about' },
     { title: 'Projects', href: '/projects' },
     { title: 'Gallery', href: '/gallery' },
+    { title: 'Services', href: '/services' },
+    { title: 'Blog', href: '/blog' },
   ];
 
   useEffect(() => {
